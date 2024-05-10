@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock header %}
+  
+
+{% block carousel %}
+    {% include 'carousel3.html' %}
+{% endblock carousel %}
+
+
+
+{% block content %}
+<div class="container nt-5 mb-5">
+    <h2 class="pt-2 pb-3 text-center gave">Login</h2>
+    <div class="row justify-content-center gy-3">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="details">
+          <img src="{% static '' %}img/picture 10.jpg" class="fluid" alt="">
+        </div>
+        </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <div class="cform">
+          <form action="{%url 'signin'%}" method="POST">
+            {%csrf_token%}
+            <div class="mb-3">
+              <label for="">Username</label>
+              <input type="text" name="username" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="">Password</label>
+              <input type="password" name="password" class="form-control">
+            </div>
+            <div>
+              <button type="sumbit" class="btm contact-btn">Login</button>
+              <a href="{%url 'signup'%}" class="btn register-btn ms-3">Register</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+    
