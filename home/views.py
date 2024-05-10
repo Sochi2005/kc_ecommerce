@@ -168,20 +168,19 @@ def shopcart(request):
         item_id = request.POST["product_id"]
         product = Products.objects.get(pk=item_id)
         order_num = Profile.objects.get(user__username= request.user.username)
-        cart_no = order_num.id
+        cart_no = order_num.id 
 
-        cart= Shopcart.objects.filter(user__username=request.user.username, paid=False)
+        cart = Shopcart.objects.filter(user__username=request.user.username, paid=False)
         if cart:
-            basket = Shopcart.objects.filter(product_id=product.id, user__username= request.user.username, paid=False).first()
+            basket = Shopcart.objects.filter(product_id=product.id, user__username=request.user.username, paid=False).first()
             if basket:
                 basket.quantity += quantity
-                basket.amount = basket.price * basket.quantity
+                basket.amount = basket.price * basket.quantity 
                 basket.save()
-                print(basket)
-                messages.success(request, "Product added to cart successfully")
+                messages.success(request, "Product added to cart successfully ")
                 return redirect("product")
             else:
-                cartitems =Shopcart()
+                cartitems = Shopcart()
                 cartitems.user = request.user
                 cartitems.product = product
                 cartitems.title = product.title
@@ -191,11 +190,10 @@ def shopcart(request):
                 cartitems.paid = False
                 cartitems.order_num = cart_no
                 cartitems.save()
-                print(cartitems)
-                messages.success(request,f"{product.title} has been added to cart successfully!...")
+                messages.success(request, f"{product.title} has beenm addded to cart successfully ")
                 return redirect("product")
         else:
-            cartitems =Shopcart()
+            cartitems = Shopcart()
             cartitems.user = request.user
             cartitems.product = product
             cartitems.title = product.title
@@ -205,10 +203,10 @@ def shopcart(request):
             cartitems.paid = False
             cartitems.order_num = cart_no
             cartitems.save()
-            print(cartitems)
-            messages.success(request,f"{product.title} has been added to cart successfully!...")
+            messages.success(request, f"{product.title} has been addded to cart successfully ")
             return redirect("product")
-    return redirect("shopcart")
+    # return redirect("shopcart")
+    return render(request, "shopcart.html")
     
 @login_required(login_url="signin")
 def displaycart(request):
